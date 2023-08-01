@@ -1,0 +1,39 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug [Main]",
+      "type": "node",
+      "request": "launch",
+      "protocol": "inspector",
+      "cwd": "${workspaceRoot}",
+      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
+      "windows": {
+        "runtimeExecutable": "${workspaceRoot}/node_modules/electron/dist/electron.exe"
+      },
+      "runtimeArgs": [
+          "--remote-debugging-port=9223",
+          "."
+      ],
+      "args" : [".", "debug"],
+      "outputCapture": "std"
+    },
+    {
+      "name": "Debug [Renderer]",
+      "type": "chrome",
+      "request": "attach",
+      "port": 9223,
+      "webRoot": "${workspaceFolder}",
+      "timeout": 30000
+    }    
+  ],
+  "compounds": [
+      {
+          "name": "Debug [All]",
+          "configurations": [
+              "Debug [Main]",
+              "Debug [Renderer]"
+          ]
+      }
+  ]
+}
